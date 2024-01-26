@@ -57,8 +57,7 @@ if ($_GET['f'] == 'general') {
         $title = mysqli_real_escape_string($sqlConnect, $_POST['title']);
 
         $query = "REPLACE INTO Titles SET link = '{$linkNaked}', title = '{$title}'";
-        // $query = "INSERT INTO Titles (link, title) VALUES ($linkNaked, $title) ON DUPLICATE KEY UPDATE link = VALUES($linkNaked), title = VALUES($title)";
-
+        
         $result = mysqli_query($sqlConnect, $query);
         if ($result) {
             echo "success";
