@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+  php:
+    build: .
+    ports:
+      - "3017:80"
+    depends_on:
+      - mysql-db
+    restart: unless-stopped
+    image: "nheek/shareme:latest"
+
+  mysql-db:
+    image: mysql:latest
+    restart: unless-stopped
+    ports:
+      - "4017:3306"
+    env_file:
+      - .env
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+    volumes:
+      - .sql_data:/docker-entrypoint-initdb.d/
