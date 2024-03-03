@@ -54,12 +54,12 @@ jobs:
             echo "MYSQL_PASSWORD=${{ secrets.MYSQL_PASSWORD }}" >> .env
             echo "MYSQL_DATABASE=${{ secrets.MYSQL_DATABASE }}" >> .env
             echo "DOCKERHUB_USERNAME=${{ secrets.DOCKERHUB_USERNAME }}" >> .env
-            curl -L https://raw.githubusercontent.com/nheek/shareme/main/Dockerfile
-            curl -L https://raw.githubusercontent.com/nheek/shareme/main/docker-compose.yml
+            curl -O -L https://raw.githubusercontent.com/nheek/shareme/main/Dockerfile
+            curl -O -L https://raw.githubusercontent.com/nheek/shareme/main/docker-compose.yml
 
             mkdir .sql_data
             cd .sql_data
-            curl -L https://raw.githubusercontent.com/nheek/shareme/main/.sql_data/create_database.sql
+            curl -O -L https://raw.githubusercontent.com/nheek/shareme/main/.sql_data/create_database.sql
 
             docker-compose up -d
   
