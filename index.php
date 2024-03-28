@@ -1,10 +1,10 @@
 <?php
 // Include necessary functions and JavaScript functions
+session_start();
 include_once $_SERVER['DOCUMENT_ROOT'] . '/includes/functions.php';
 include_once $_SERVER['DOCUMENT_ROOT'] . '/includes/js_functions.php';
 
 // Start or resume the PHP session
-session_start();
 
 // Check if the 'link' parameter is not set in the URL
 if (!isset($_GET["link"])) {

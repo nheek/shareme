@@ -7,6 +7,7 @@
     getPage("checklist", "../../../pages/checklist.php");
 
     function addItem() {
+        console.log("add ran")
         // Get the input value
         var item = newItem.value;
 
