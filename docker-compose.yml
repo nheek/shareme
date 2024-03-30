@@ -4,7 +4,7 @@ services:
   php:
     build: .
     ports:
-      - "3002:80"
+      - "3004:80"
     depends_on:
       - mysql-db
     restart: unless-stopped
@@ -14,7 +14,7 @@ services:
     image: mysql:latest
     restart: unless-stopped
     ports:
-      - "4002:3306"
+      - "4004:3306"
     env_file:
       - .env
     environment:
