@@ -58,12 +58,15 @@
             },
             success: function(data) {
                 if (data == "success") {
+                    console.log("add item working")
                     // If server response is 'success', append the list item to the checklist
                     document.getElementById("checklist").appendChild(listItem);
 
                     // Clear the input field for the next item
                     document.getElementById("new-item").value = "";
                 }
+            }, error: function(data) {
+                console.log("add item not working");
             }
         });
 
