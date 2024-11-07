@@ -38,16 +38,11 @@ jobs:
           username: ${{ secrets.SERVER_USERNAME }}
           key: ${{ secrets.SERVER_SSH_KEY }}
           script: |
-            # Change to the appropriate directory..
             cd apps
             mkdir shareme
             cd shareme
-            
-            # Pull the Docker Compose project on the remote server
-            docker pull ${{ secrets.DOCKERHUB_USERNAME }}/shareme:latest
-            docker pull mysql
 
-            rm -rf .env
+            rm -f .env
             echo "MYSQL_PORT=${{ secrets.MYSQL_PORT }}" >> .env
             echo "MYSQL_HOST=${{ secrets.MYSQL_HOST }}" >> .env
             echo "MYSQL_USER=${{ secrets.MYSQL_USER }}" >> .env
@@ -56,7 +51,7 @@ jobs:
             echo "DOCKERHUB_USERNAME=${{ secrets.DOCKERHUB_USERNAME }}" >> .env
             curl -O -L https://raw.githubusercontent.com/nheek/shareme/main/Dockerfile
             curl -O -L https://raw.githubusercontent.com/nheek/shareme/main/docker-compose.yml
-            
+
             mkdir .custom_sql_settings
             cd .custom_sql_settings
             curl -O -L https://raw.githubusercontent.com/nheek/shareme/main/.custom_sql_settings/my.cnf
@@ -66,5 +61,6 @@ jobs:
             cd .sql_data
             curl -O -L https://raw.githubusercontent.com/nheek/shareme/main/.sql_data/create_database.sql
 
-            docker compose up -d
-  
+            cd ..
+            docker compose pull
+            docker compose up -d && curl -d "shareme deployed successfully" https://ntfy.nheek.com/${{ secrets.NTFY_TOPIC }}
